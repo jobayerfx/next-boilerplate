@@ -1,112 +1,159 @@
 "use client";
-import Logo from "../Logo";
+import { useSession, signIn, signOut } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { menu } from "../../config/menu";
-// export interface ChildNavigationLink {
-//   name: string;
-//   url: string;
-// }
-// export interface NavigationLink {
-//   name: string;
-//   url: string;
-//   hasChildren?: boolean;
-//   children?: ChildNavigationLink[];
-// }
+import { useState } from "react";
+import { Dialog, Popover } from "@headlessui/react";
+import {
+  ArrowPathIcon,
+  Bars3Icon,
+  ChartPieIcon,
+  CursorArrowRaysIcon,
+  FingerPrintIcon,
+  SquaresPlusIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
+import {
+  ChevronDownIcon,
+  PhoneIcon,
+  PlayCircleIcon,
+} from "@heroicons/react/24/solid";
 
-const main = menu.main;
-// const currentPath = usePathname();
-console.log(main);
-const currentPath = "/";
-function Header() {
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
+
+export default function Example() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { data: session } = useSession();
+
   return (
-    <header className="fixed">
-      <nav className="navbar container">
-        {/* <!-- logo --> */}
-        <div className="order-0">
-          <Logo />
+    <header className="bg-white border-gray-200 shadow sticky top-0">
+      <nav
+        className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+        aria-label="Global"
+      >
+        <div className="flex lg:flex-1">
+          <a href="#" className="-m-1.5 p-1.5">
+            <span className="sr-only">My Company</span>
+            <Image
+              className="h-8 w-auto"
+              src="/images/logo.svg"
+              width={200}
+              height={150}
+              alt=""
+            />
+          </a>
         </div>
-        {/* <!-- navbar toggler --> */}
-        <input id="nav-toggle" type="checkbox" className="hidden" />
-        <label
-          id="show-button"
-          for="nav-toggle"
-          className="order-2 flex cursor-pointer items-center md:order-1 md:hidden"
-        >
-          <svg className="h-6 fill-current" viewBox="0 0 20 20">
-            <title>Menu Open</title>
-            <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z"></path>
-          </svg>
-        </label>
-        <label
-          id="hide-button"
-          for="nav-toggle"
-          className="order-2 hidden cursor-pointer items-center md:order-1"
-        >
-          <svg className="h-6 fill-current" viewBox="0 0 20 20">
-            <title>Menu Close</title>
-            <polygon
-              points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2"
-              transform="rotate(45 10 10)"
-            ></polygon>
-          </svg>
-        </label>
-        {/* <!-- /navbar toggler --> */}
-
-        <ul
-          id="nav-menu"
-          className="navbar-nav order-3 hidden w-full items-center md:order-1 md:flex md:w-auto md:space-x-2"
-        >
-          {main.map((menu) => (
-            <>
-              {menu.hasChildren ? (
-                <li className="nav-item nav-dropdown group relative">
-                  <span className="nav-link inline-flex items-center">
-                    {menu.name}
-                    <svg className="h-4 w-4 fill-current" viewBox="0 0 20 20">
-                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                    </svg>
-                  </span>
-                  <ul className="nav-dropdown-list hidden group-hover:block md:invisible md:absolute md:block md:opacity-0 md:group-hover:visible md:group-hover:opacity-100">
-                    {menu.children?.map((child) => (
-                      <li className="nav-dropdown-item">
-                        <Link
-                          href={child.url}
-                          className={`nav-dropdown-link block ${
-                            currentPath === child.url && "active"
-                          }`}
-                        >
-                          {child.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ) : (
-                <li className="nav-item">
-                  <Link
-                    href={menu.url}
-                    className={`nav-link block ${
-                      currentPath === menu.url && "active"
-                    }`}
-                  >
-                    {menu.name}
-                  </Link>
-                </li>
-              )}
-            </>
-          ))}
-          <li className="nav-item">
+        <div className="flex lg:hidden">
+          <button
+            type="button"
+            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+            onClick={() => setMobileMenuOpen(true)}
+          >
+            <span className="sr-only">Open main menu</span>
+            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+          </button>
+        </div>
+        <Popover.Group className="hidden lg:flex lg:gap-x-12">
+          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+            Features
+          </a>
+          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+            Marketplace
+          </a>
+          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+            Company
+          </a>
+        </Popover.Group>
+        {!session && (
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <Link
-              className="inline-block cursor-pointer p-2 text-xl text-dark hover:text-primary md:block"
-              href="/search"
+              href='/login'
+
+              className="text-sm font-semibold leading-6 text-gray-900"
             >
-              <i className=""></i>
+              Log in <span aria-hidden="true">&rarr;</span>
             </Link>
-          </li>
-        </ul>
+          </div>
+        )}
+        {session && (
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+            <Link
+              href="#"
+              onClick={e => {
+                e.preventDefault()
+                signOut()
+              }}>
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
+              Logout <span aria-hidden="true">&rarr;</span>
+            </Link>
+          </div>
+        )}
       </nav>
+      <Dialog
+        as="div"
+        className="lg:hidden"
+        open={mobileMenuOpen}
+        onClose={setMobileMenuOpen}
+      >
+        <div className="fixed inset-0 z-10" />
+        <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <div className="flex items-center justify-between">
+            <a href="#" className="-m-1.5 p-1.5">
+              <span className="sr-only">Your Company</span>
+              <Image
+                className="h-8 w-auto"
+                src="/images/logo.svg"
+                width={200}
+                height={150}
+                alt=""
+              />
+            </a>
+            <button
+              type="button"
+              className="-m-2.5 rounded-md p-2.5 text-gray-700"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <span className="sr-only">Close menu</span>
+              <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+            </button>
+          </div>
+          <div className="mt-6 flow-root">
+            <div className="-my-6 divide-y divide-gray-500/10">
+              <div className="space-y-2 py-6">
+                <a
+                  href="#"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
+                  Features
+                </a>
+                <a
+                  href="#"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
+                  Marketplace
+                </a>
+                <a
+                  href="#"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
+                  Company
+                </a>
+              </div>
+              <div className="py-6">
+                <a
+                  href="#"
+                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
+                  Log in
+                </a>
+              </div>
+            </div>
+          </div>
+        </Dialog.Panel>
+      </Dialog>
     </header>
   );
 }
-export default Header;

@@ -4,31 +4,12 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="mt-20 bg-theme-light py-6">
-      <div className="container text-center">
-        <div className="row items-center">
-          <div className="lg:col-4">
-            <Logo />
-          </div>
-          <div className="mt-8 lg:col-4 lg:mt-0">
-            {/* footer menu */}
-            <ul className="space-x-4">
-              {menu.footer.map((menu) => (
-                <li className="inline-block">
-                  <Link
-                    href={menu.url}
-                    className="text-[#343a40] hover:underline lg:p-4"
-                  >
-                    {menu.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-        {/* social icons */}
-        {/* copyright */}
-        <p className="footer-copyright-text mt-10">copy © 2023 jobayeer.me</p>
+    <footer className="bg-neutral-200 text-center dark:bg-neutral-700 lg:text-left">
+      <div className="p-4 text-center text-neutral-700 dark:text-neutral-200">
+        © 2023 jobayeer.me copyright: &nbsp;
+        <a className="text-neutral-800 dark:text-neutral-400" href="#">
+          Next Boilerplate
+        </a>
       </div>
     </footer>
   );
