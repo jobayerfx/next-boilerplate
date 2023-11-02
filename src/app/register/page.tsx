@@ -11,7 +11,7 @@ const Register = () => {
 
   useEffect(() => {
     if (sessionStatus === "authenticated") {
-      router.replace("/dashboard");
+      router.replace("/");
     }
   }, [sessionStatus, router]);
 
@@ -65,8 +65,10 @@ const Register = () => {
   return (
     sessionStatus !== "authenticated" && (
       <div className="flex min-h-screen flex-col items-center justify-between p-24">
-        <div className="bg-[#212121] p-8 rounded shadow-md w-96">
-          <h1 className="text-4xl text-center font-semibold mb-8">Register</h1>
+        <div className="bg-[#3f441b] p-8 rounded shadow-md w-96">
+          <h1 className="text-4xl text-center font-semibold mb-8 text-white">
+            Register
+          </h1>
           <form onSubmit={handleSubmit}>
             <input
               type="text"
@@ -82,16 +84,18 @@ const Register = () => {
             />
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+              className="w-full bg-blue-800 text-white py-2 rounded hover:bg-blue-600"
             >
               {" "}
               Register
             </button>
             <p className="text-red-600 text-[16px] mb-4">{error && error}</p>
           </form>
-          <div className="text-center text-gray-500 mt-4">- OR -</div>
+          <div className="text-center font-semibold text-slate-100 mt-4">
+            - OR -
+          </div>
           <Link
-            className="block text-center text-blue-500 hover:underline mt-2"
+            className="block text-center text-white underline hover:no-underline mt-2"
             href="/login"
           >
             Login with an existing account

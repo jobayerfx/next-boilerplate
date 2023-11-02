@@ -34,7 +34,7 @@ export default function Example() {
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
+          <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">My Company</span>
             <Image
               className="h-8 w-auto"
@@ -43,7 +43,7 @@ export default function Example() {
               height={150}
               alt=""
             />
-          </a>
+          </Link>
         </div>
         <div className="flex lg:hidden">
           <button
@@ -69,8 +69,7 @@ export default function Example() {
         {!session && (
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <Link
-              href='/login'
-
+              href="/login"
               className="text-sm font-semibold leading-6 text-gray-900"
             >
               Log in <span aria-hidden="true">&rarr;</span>
@@ -81,10 +80,10 @@ export default function Example() {
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <Link
               href="#"
-              onClick={e => {
-                e.preventDefault()
-                signOut()
-              }}>
+              onClick={(e) => {
+                e.preventDefault();
+                signOut();
+              }}
               className="text-sm font-semibold leading-6 text-gray-900"
             >
               Logout <span aria-hidden="true">&rarr;</span>

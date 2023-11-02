@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -12,7 +13,7 @@ const Login = () => {
 
   useEffect(() => {
     if (sessionStatus === "authenticated") {
-      router.replace("/dashboard");
+      router.replace("/");
     }
   }, [sessionStatus, router]);
 
@@ -57,8 +58,10 @@ const Login = () => {
   return (
     sessionStatus !== "authenticated" && (
       <div className="flex min-h-screen flex-col items-center justify-between p-24">
-        <div className="bg-[#212121] p-8 rounded shadow-md w-96">
-          <h1 className="text-4xl text-center font-semibold mb-8 ">Login</h1>
+        <div className="bg-[#363a1c] p-8 rounded shadow-md w-96">
+          <h1 className="text-4xl text-center font-semibold mb-8 text-white">
+            Login
+          </h1>
           <form onSubmit={handleSubmit}>
             <input
               type="text"
@@ -79,20 +82,28 @@ const Login = () => {
               {" "}
               Sign In
             </button>
-            <p className="text-red-600 text-[16px] mb-4">{error && error}</p>
+            <p className="text-red-800 text-[16px] mb-4">{error && error}</p>
           </form>
           <button
-            className="w-full bg-black text-white py-2 rounded hover:bg-gray-800"
+            className="w-full bg-white text-black py-2 rounded hover:bg-gray-300 flex gap-4 justify-center items-center"
             onClick={(e) => {
               e.preventDefault();
               signIn("github");
             }}
           >
-            Sign In with Github
+            <Image
+              src="/images/github.svg"
+              width={40}
+              height={40}
+              alt="github login"
+            />
+            <span>Sign In with Github</span>
           </button>
-          <div className="text-center text-gray-500 mt-4">- OR -</div>
+          <div className="text-center font-semibold text-slate-100 mt-4">
+            - OR -
+          </div>
           <Link
-            className="block text-center text-blue-500 hover:underline mt-2"
+            className="block text-center text-white underline hover:no-underline mt-2"
             href="/register"
           >
             Register Here
