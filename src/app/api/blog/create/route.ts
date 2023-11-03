@@ -13,6 +13,7 @@ export const POST = async (request: any) => {
       category,
       content,
       tags,
+      timestrap: new Date(),
     });
     return new NextResponse("New blog is created.", { status: 200 });
   } catch (err: any) {

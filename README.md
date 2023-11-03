@@ -1,3 +1,23 @@
+<h1 align=center>NextJS 14 Boilerplate</h1>
+<p align=center>This project is an elegantly crafted and exceptionally flexible solution, tailored for blog websites. It seamlessly integrates with the backend API through the Next.js API feature, and data is stored in MongoDB. Users have the ability to effortlessly log in and log out using their GitHub credentials.
+</p>
+<h2 align="center"> <a target="_blank" href="https://next-boilerplate.vercel.app/" rel="nofollow">👀Demo</a> | <a  target="_blank" href="https://pagespeed.web.dev/report?url=#">Page Speed (100%)🚀</a>
+</h2>
+
+## 🔑Key Features
+
+- 📄 5+ Pre-designed pages
+- 🎨 Highly Customizable
+- ⚡ Fast by Default
+- 📚 Use NoSQL database: MongoDb
+- ⚙️ Netlify Settings Pre-configured
+- 📬 Contact Form Support
+- 🌅 Next Auth
+- 📝 Create new blog posts with validation
+- 🎨 Built with Tailwind CSS Framework
+- 📱 Fully Responsive on Desktops, Tablets, and Smartphones
+- 🔍 SEO Friendly
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

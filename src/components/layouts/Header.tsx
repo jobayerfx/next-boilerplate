@@ -56,14 +56,20 @@ export default function Example() {
           </button>
         </div>
         <Popover.Group className="hidden lg:flex lg:gap-x-12">
+          <Link
+            href="/"
+            className="text-sm font-semibold leading-6 text-gray-900"
+          >
+            Blogs
+          </Link>
+          <Link
+            href="/blog/new"
+            className="text-sm font-semibold leading-6 text-gray-900"
+          >
+            Create new post
+          </Link>
           <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Features
-          </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Marketplace
-          </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Company
+            Conatct
           </a>
         </Popover.Group>
         {!session && (
